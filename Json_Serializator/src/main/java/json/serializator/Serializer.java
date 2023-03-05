@@ -3,8 +3,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Serializator {
-    public static JSONObject serialize(Object obj) {
+public class Serializer {
+    public static JSONObject serialize(Object obj) throws NullPointerException{
         if (obj == null) {
             throw new NullPointerException();
         }

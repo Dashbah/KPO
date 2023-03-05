@@ -8,10 +8,10 @@ import java.util.List;
 public class Student implements Serializable {
     String name = "Biba";
 
-    @JsonProperty(name = "SURNAME")
+    @JsonProperty
     String surname = "Boba";
 
-    @JsonProperty(name = "AGE")
+    @JsonProperty
     int age = 19;
 
     List<Integer> grades;
