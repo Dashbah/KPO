@@ -7,22 +7,20 @@ import org.junit.jupiter.api.Test;
 public class StudentTest {
     @Test
     void Serialize_NotAllFieldsHaveAnnotation_ReturnsCorrectJson() {
-        @JsonProperty
         class SimpleTestObject {
-            @JsonProperty
+            @JsonProperty(name = "NAME")
             private final String name = "test";
-            @JsonProperty
+            @JsonProperty(name =  "AGE")
             private final int age = 20;
             private final String address = "test address";
         }
         SimpleTestObject testObj = new SimpleTestObject();
         JSONObject jsonObject = Serializer.serialize(testObj);
-        Assertions.assertEquals("{\"name\":\"test\",\"age\":20}", jsonObject.toString());
+        Assertions.assertEquals("{\"NAME\":\"test\",\"AGE\":20}", jsonObject.toString());
     }
 
     @Test
     void Serialize_NoFieldsHaveAnnotation_ReturnsEmptyJson() {
-        @JsonProperty
         class SimpleTestObject {
             private final String name = "test";
             private final int age = 20;
@@ -34,19 +32,18 @@ public class StudentTest {
     }
 
     @Test
-    void Serialize_AllFieldsHaveAnnotation_ReturnsCorrectJson() {
-        @JsonProperty
+    void Serialize_FieldsDontHaveCustomizedFieldNamesAnnotation_ReturnsCorrectJson() {
         class SimpleTestObject {
             @JsonProperty
             private final String name = "test";
-            @JsonProperty
+            @JsonProperty(name = "AGE")
             private final int age = 20;
             @JsonProperty
             private final String address = "test address";
         }
         SimpleTestObject testObj = new SimpleTestObject();
         JSONObject jsonObject = Serializer.serialize(testObj);
-        Assertions.assertEquals("{\"address\":\"test address\",\"name\":\"test\",\"age\":20}",
+        Assertions.assertEquals("{\"address\":\"test address\",\"name\":\"test\",\"AGE\":20}",
                 jsonObject.toString());
     }
 
@@ -56,18 +53,11 @@ public class StudentTest {
     }
 
     @Test
-    void Serialize_ObjectDoesntHaveAnnotation_ThrowsUnsupportedOperationException() {
-        String name = "unsupported test";
-        Assertions.assertThrows(UnsupportedOperationException.class, () -> Serializer.serialize(name));
-    }
-
-    @Test
     void Serialize_ObjectHasNullFieldsToSerialize_ThrowsNullPointerException() {
-        @JsonProperty
         class TestObjectWithNull {
-            @JsonProperty
+            @JsonProperty(name = "NUMBER")
             private final int number = 12;
-            @JsonProperty
+            @JsonProperty(name = "NAME")
             private final String name = null;
         }
         TestObjectWithNull testObjWithNull = new TestObjectWithNull();

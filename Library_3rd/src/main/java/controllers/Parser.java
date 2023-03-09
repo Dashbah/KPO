@@ -15,25 +15,26 @@ public class Parser {
 
     /**
      * parses String
-     * @param input
+     * @param inputString
      * @return specific Command class
      * @throws IllegalArgumentException if there is no such command
      */
-    public static Command parseCommand(String input) throws IllegalArgumentException {
-        if (input.startsWith("/get")) {
-            if (input.length() > 5) {
-                return new GetBookCommand(input.substring(5));
+    public static Command parseCommand() throws IllegalArgumentException {
+        var inputString = input.nextLine();
+        if (inputString.startsWith("/get")) {
+            if (inputString.length() > 5) {
+                return new GetBookCommand(inputString.substring(5));
             }
         }
-        if (input.startsWith("/list")) {
+        if (inputString.startsWith("/list")) {
             return new ShowTakenBooksCommand();
         }
-        if (input.startsWith("/put")) {
-            if (input.length() > 5) {
-                return new PutBookCommand(input.substring(5));
+        if (inputString.startsWith("/put")) {
+            if (inputString.length() > 5) {
+                return new PutBookCommand(inputString.substring(5));
             }
         }
-        if (input.startsWith("/all")) {
+        if (inputString.startsWith("/all")) {
             return new ShowAllItemsCommand();
         }
         throw new IllegalArgumentException("no such command!");
