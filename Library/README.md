@@ -1,8 +1,15 @@
+This version includes better tests and architecture is less connected to console.
+
+
+The old README about my suffering ->
+________
+
+
 Now it has tests for parser and storage. I found some problems in my code (better to say architecture). It's difficult to test all methods 
 because some important of them that contain logic are private. And the second thing is about console messages.
 I can't test a lot of methods just because they require console input/output.
 
-The old README about my algorithms suffering ->
+The old old README about my algorithms suffering ->
 ______
 
 How it was planned to be:
