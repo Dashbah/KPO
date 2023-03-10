@@ -3,6 +3,7 @@ package controllers;
 import Commands.Command;
 import models.Storage;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,9 @@ public class Library {
 
     public Library() {
         storage = new Storage();
-        storage.addToStorageRandomElements();
+        Random rnd = new Random();
+        int numOfBooks = rnd.nextInt(15) + 3;
+        storage.addToStorageRandomBooks(numOfBooks);
     }
 
     /**
@@ -27,7 +30,7 @@ public class Library {
     public void startDialog() {
         showCommands();
         while (true) {
-            var nextLine = input.nextLine();
+            var nextLine = getCommand();
             if (nextLine.startsWith("/q")) {
                 return;
             }
@@ -38,6 +41,10 @@ public class Library {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+
+    private String getCommand() {
+        return input.nextLine();
     }
 
     /**

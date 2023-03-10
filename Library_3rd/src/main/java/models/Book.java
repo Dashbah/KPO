@@ -9,7 +9,25 @@ public class Book {
     private List<String> authors;
     private int yearOfPublishing;
 
-    Book() {
+    public Book() {
+    }
+
+    public Book(String caption, List<String> authors, Integer yearOfPublishing) {
+        this.caption = caption;
+        this.authors = authors;
+        this.yearOfPublishing = yearOfPublishing;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
+    }
+
+    public void setYearOfPublishing(Integer yearOfPublishing) {
+        this.yearOfPublishing = yearOfPublishing;
     }
 
     public String getCaption() {

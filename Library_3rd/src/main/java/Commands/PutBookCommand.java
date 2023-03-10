@@ -24,14 +24,14 @@ public class PutBookCommand implements Command {
      */
     @Override
     public void execute(Storage storage) {
-        var books = storage.findAllBooksFromTaken(caption);
+        var books = storage.findAllBooksFromTakenByCaption(caption);
         switch (books.size()) {
             case 0 -> {
                 System.out.println("You didn't take this book");
                 break;
             }
             case 1 -> {
-                storage.putBook(books.get(0));
+                storage.putBookToStorage(books.get(0));
                 System.out.println("Thank for returning " + books.get(0));
             }
             default -> {
@@ -41,7 +41,7 @@ public class PutBookCommand implements Command {
                 }
                 System.out.println("Choose the book (enter it's id)");
                 var numberOfTheBook = Parser.intParser(0, books.size() - 1);
-                storage.putBook(books.get(numberOfTheBook));
+                storage.putBookToStorage(books.get(numberOfTheBook));
                 System.out.println("Thank for returning " + books.get(numberOfTheBook));
             }
         }

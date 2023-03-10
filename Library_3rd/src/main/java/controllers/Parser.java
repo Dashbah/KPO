@@ -19,8 +19,7 @@ public class Parser {
      * @return specific Command class
      * @throws IllegalArgumentException if there is no such command
      */
-    public static Command parseCommand() throws IllegalArgumentException {
-        var inputString = input.nextLine();
+    public static Command parseCommand(String inputString) throws IllegalArgumentException {
         if (inputString.startsWith("/get")) {
             if (inputString.length() > 5) {
                 return new GetBookCommand(inputString.substring(5));

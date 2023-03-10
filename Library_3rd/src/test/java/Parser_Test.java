@@ -10,19 +10,19 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Parser_Test {
     @Test
     void Parser_CommandStartsWithGet_returnsGetBookCommand() {
-        assertEquals(Parser.parseCommand("/get something") instanceof GetBookCommand, true);
+        assertTrue(Parser.parseCommand("/get something") instanceof GetBookCommand);
     }
     @Test
     void Parser_CommandStartsWithPut_returnsPutBookCommand() {
-        assertEquals(Parser.parseCommand("/put something") instanceof PutBookCommand, true);
+        assertTrue(Parser.parseCommand("/put something") instanceof PutBookCommand);
     }
     @Test
     void Parser_CommandStartsWithAll_returnsShowAllItemsCommand() {
-        assertEquals(Parser.parseCommand("/all") instanceof ShowAllItemsCommand, true);
+        assertTrue(Parser.parseCommand("/all") instanceof ShowAllItemsCommand);
     }
     @Test
     void Parser_CommandStartsWithAll_returnsShowTakenBooksCommand() {
-        assertEquals(Parser.parseCommand("/list") instanceof ShowTakenBooksCommand, true);
+        assertTrue(Parser.parseCommand("/list") instanceof ShowTakenBooksCommand);
     }
     @Test
     void Parser_WrongCommand_throwsIllegalArgumentException() {

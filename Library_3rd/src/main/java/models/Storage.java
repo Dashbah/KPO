@@ -19,7 +19,7 @@ public class Storage {
      * finds all free books with provided caption
      * complexity O(n)
      */
-    public List<Book> findAllBooks(String caption) {
+    public List<Book> findAllBooksByCaption(String caption) {
         List<Book> res = new ArrayList<>();
         for (Book book : freeBooks) {
             if (book.getCaption().equals(caption)) {
@@ -29,11 +29,22 @@ public class Storage {
         return res;
     }
 
+    public void addNewBookToStorage(Book book) {
+        if (book != null) {
+            freeBooks.add(book);
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
+    public void addBookToTakenBooksList(Book book) {
+        takenBooks.add(book);
+    }
     /**
      * finds all taken books with provided caption
      * complexity O(n)
      */
-    public List<Book> findAllBooksFromTaken(String caption) {
+    public List<Book> findAllBooksFromTakenByCaption(String caption) {
         List<Book> res = new ArrayList<>();
         for (Book takenBook : takenBooks) {
             if (takenBook.getCaption().equals(caption)) {
@@ -48,7 +59,7 @@ public class Storage {
      * if there is no such book ->
      * throws NullPointerException("no such book");
      */
-    public void getBook(Book book) {
+    public void getBookFromStorage(Book book) {
         if (freeBooks.contains(book)) {
             takenBooks.add(book);
             freeBooks.remove(book);
@@ -62,7 +73,7 @@ public class Storage {
      * if there is no such book ->
      * throws NullPointerException("no such book");
      */
-    public void putBook(Book book) {
+    public void putBookToStorage(Book book) {
         if (takenBooks.contains(book)) {
             freeBooks.add(book);
             takenBooks.remove(book);
@@ -91,9 +102,7 @@ public class Storage {
      * new book is generated with a help of
      * Book::generateRandomBook()
      */
-    public void addToStorageRandomElements() {
-        Random rnd = new Random();
-        int numOfBooks = rnd.nextInt(15) + 3;
+    public void addToStorageRandomBooks(Integer numOfBooks) {
         for (int i = 0; i < numOfBooks; ++i) {
             var newBook = new Book();
             newBook.generateRandomBook();
