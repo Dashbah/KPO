@@ -6,12 +6,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 public class Client {
-    Socket socket;
-    InputStream response;
-    OutputStream request;
+    private final InputStream response;
+    private final OutputStream request;
 
-    byte[] data;
-
+    private final String host;
+    private final int port;
     /**
      * Constructor for the Client class that creates a new socket and initializes input and output streams.
      *
@@ -20,7 +19,9 @@ public class Client {
      * @throws IOException if an I/O error occurs while creating the socket
      */
     Client(String site, int port) throws IOException {
-        socket = new Socket(site, port);
+        Socket socket = new Socket(site, port);
+        this.host = site;
+        this.port = port;
         response = socket.getInputStream();
         request = socket.getOutputStream();
     }
@@ -33,8 +34,8 @@ public class Client {
      * @throws IOException if an I/O error occurs while sending the request or reading the response
      */
     public String getQuestion(String site) throws IOException {
-        data = ("GET " + site + " HTTP/1.1\r\n" +
-                "Host: jservice.io\r\n" +
+        byte[] data = ("GET " + site + " HTTP/1.1\r\n" +
+                "Host: " + host + "\r\n" +
                 "User-Agent: Mozilla/5.0\r\n" +
                 "Accept: */*\r\n\r\n").getBytes();
 

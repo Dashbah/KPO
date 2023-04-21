@@ -1,4 +1,4 @@
-package quiz;
+package deserializer;
 
 import com.google.gson.Gson;
 

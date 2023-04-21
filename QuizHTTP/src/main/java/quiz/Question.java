@@ -7,32 +7,29 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Question {
     @SerializedName("id")
-    int id;
+    private int id;
     @SerializedName("answer")
-    String answer;
+    private String answer;
     @SerializedName("question")
-    String question;
+    private String question;
     @SerializedName("value")
-    int value;
+    private int value;
     @SerializedName("airdate")
-    String airdate;
+    private String airdate;
     @SerializedName("created_at")
-    String createdAt;
+    private String createdAt;
     @SerializedName("updated_at")
-    String updatedAt;
+    private String updatedAt;
     @SerializedName("category_id")
-    int categoryId;
+    private int categoryId;
     @SerializedName("game_id")
-    int gameId;
+    private int gameId;
     @SerializedName("invalid_count")
-    int invalidCount;
+    private int invalidCount;
     @SerializedName("category")
-    Category category;
+    private Category category;
 
-    public Question() {
-    }
-
-    class Category {
+    private class Category {
         @SerializedName("id")
         int id;
         @SerializedName("title")
@@ -43,5 +40,13 @@ public class Question {
         String updatedAt;
         @SerializedName("clues_count")
         int cluesCount;
+    }
+
+    String getAnswer() {
+        return answer;
+    }
+
+    String getQuestion() {
+        return question;
     }
 }

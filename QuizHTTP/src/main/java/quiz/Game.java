@@ -1,9 +1,10 @@
 package quiz;
 
+import deserializer.Deserializer;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
-
 public class Game {
     private Client clientServer;
     private int numOfQuestions = 0;
@@ -26,16 +27,16 @@ public class Game {
         String personAnswer;
         do {
             question = getQuestion();
-            printQuestion(question.question);
+            printQuestion(question.getQuestion());
             personAnswer = getAnswer();
             if (personAnswer.startsWith("/q")) {
                 break;
             }
             ++numOfQuestions;
-            if (Objects.equals(question.answer, personAnswer)) {
+            if (Objects.equals(question.getAnswer(), personAnswer)) {
                 ++numOfRightQuestions;
             }
-            System.out.println("correct answer: " + question.answer);
+            System.out.println("correct answer: " + question.getAnswer());
         } while (true);
 
         showResult();
@@ -46,7 +47,7 @@ public class Game {
      * and deserializes the response into a Question object.
      * @return a Question object representing the retrieved question.
      */
-    Question getQuestion() {
+    private Question getQuestion() {
         String questionString;
         Question question = new Question();
         try {
@@ -62,7 +63,7 @@ public class Game {
      * This method asks the user for an answer to the current question and returns it as a String.
      * @return a String representing the user's answer.
      */
-    String getAnswer() {
+    private String getAnswer() {
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
@@ -72,7 +73,7 @@ public class Game {
      * This method prints the given question to the console.
      * @param question a String representing the question to be printed.
      */
-    void printQuestion(String question) {
+    private void printQuestion(String question) {
         System.out.println(question);
     }
 
@@ -80,7 +81,7 @@ public class Game {
      * This method displays the final result of the game, showing the number
      * of questions answered correctly and the total number of questions answered.
      */
-    void showResult() {
+    private void showResult() {
         System.out.println("Congrats! Result: " + numOfRightQuestions + "/" + numOfQuestions);
     }
 }
