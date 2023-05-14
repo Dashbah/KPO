@@ -1,4 +1,4 @@
-package quiz;
+package game.quiz;
 
 import com.google.gson.annotations.SerializedName;
 
