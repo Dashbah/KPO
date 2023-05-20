@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService {
     private final UserRepository userRepository;
 
-    public void register(String userName, String password) {
+    void register(String userName, String password) {
         AppUser newUser = new AppUser(userName, password);
 
         if (userRepository.findByUserName(userName).isEmpty()) {
@@ -20,7 +20,7 @@ public class AuthenticationService {
         userRepository.save(newUser);
     }
 
-    public boolean authenticate(String userName, String password) {
+    boolean authenticate(String userName, String password) {
         var user = userRepository.findByUserName(userName).orElseThrow();
 
         return user.isPasswordCorrect(password);

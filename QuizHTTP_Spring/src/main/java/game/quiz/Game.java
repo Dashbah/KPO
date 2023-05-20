@@ -2,10 +2,14 @@ package game.quiz;
 
 import game.deserializer.Deserializer;
 import game.user.AppUser;
+import org.apache.commons.logging.Log;
 
+import java.io.Console;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Game {
     private Client clientServer;
@@ -31,7 +35,12 @@ public class Game {
         }
 
         System.out.println("All users: ");
-        var users = gameService.getAllUsersRequest();
+        List<AppUser> users = null;
+        try {
+            users = gameService.getAllUsersRequest();
+        } catch (IOException e) {
+            // Console.log(e.getMessage());
+        }
         assert users != null;
         for (var user : users) {
             System.out.println(user.toString());
@@ -39,7 +48,7 @@ public class Game {
 
         System.out.println("Print your username: ");
         String userName = input.nextLine();
-        System.out.println("Enter the password: \n");
+        System.out.println("Enter the password: ");
         String password = input.nextLine();
 
         var userNames = users.stream().map((AppUser::getUsername)).toList();
