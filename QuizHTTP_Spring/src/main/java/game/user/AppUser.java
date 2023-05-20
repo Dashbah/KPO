@@ -45,4 +45,12 @@ public class AppUser {
         this.username = username;
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "username=" + username +
+                ", rating=" + rating +
+                ", numOfAllQuestions=" + numOfAllQuestions +
+                ", numOfRightQuestions='" + numOfRightQuestions;
+    }
 }

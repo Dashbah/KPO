@@ -4,16 +4,19 @@ import game.deserializer.Deserializer;
 import game.user.AppUser;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Game {
     private Client clientServer;
+    private final UserGameService gameService;
     private int numOfQuestions = 0;
     private int numOfRightQuestions = 0;
-
     Scanner input = new Scanner(System.in);
+
+    public Game() {
+        gameService = new UserGameService();
+    }
 
     /**
      * This method starts the quiz game by connecting to the server, getting a random question,
@@ -21,15 +24,44 @@ public class Game {
      * It keeps asking questions until the user inputs the "/q" command to quit the game.
      */
     public void start() {
-
         System.out.println("Type \"/start\" to begin, \"/q\" to quit");
         while (!input.nextLine().startsWith("/start")) {
-            // if "/q"
+            // todo: if "/q"
             System.out.println("wrong command");
         }
 
-        authenticate();
+        System.out.println("All users: ");
+        var users = gameService.getAllUsersRequest();
+        assert users != null;
+        for (var user : users) {
+            System.out.println(user.toString());
+        }
 
+        System.out.println("Print your username: ");
+        String userName = input.nextLine();
+        System.out.println("Enter the password: \n");
+        String password = input.nextLine();
+
+        var userNames = users.stream().map((AppUser::getUsername)).toList();
+        if (userNames.contains(userName)) {
+            // auth
+            if (!gameService.auth()) {
+                System.out.println("the password is not correct, you are blocked sorry");
+            }
+        } else {
+            gameService.register();
+        }
+        // okay tipa zaregalis
+
+
+        // quiz and get results
+        play();
+
+        // save results
+        gameService.saveResults(userName, numOfRightQuestions, numOfQuestions);
+    }
+
+    private void play() {
         try {
             clientServer = new Client("jservice.io", 80);
         } catch (IOException e) {
@@ -54,32 +86,6 @@ public class Game {
         } while (true);
 
         showResult();
-    }
-
-    private void authenticate() {
-        System.out.println("All users: ");
-        var users = getAllUsersRequest();
-        assert users != null;
-        for (var user : users) {
-            System.out.println(user);
-        }
-
-        System.out.println("Print your username: ");
-        String userName = input.nextLine();
-        System.out.println("Enter the password: \n");
-        String password = input.nextLine();
-
-//        if (users.contains(userName)) {
-//            // auth
-//        } else {
-//            // register
-//        }
-
-
-    }
-
-    private List<AppUser> getAllUsersRequest() {
-        return null;
     }
 
     /**
@@ -109,7 +115,6 @@ public class Game {
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
-
 
     /**
      * This method prints the given question to the console.
