@@ -1,15 +1,14 @@
 package game.quiz;
 
 import game.deserializer.Deserializer;
+import game.question.Client;
+import game.question.Question;
 import game.user.AppUser;
-import org.apache.commons.logging.Log;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 public class Game {
     private Client clientServer;

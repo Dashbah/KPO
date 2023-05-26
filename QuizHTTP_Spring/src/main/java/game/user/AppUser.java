@@ -3,6 +3,7 @@ package game.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Data
+@Table(name = "user")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppUser {

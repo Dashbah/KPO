@@ -1,4 +1,4 @@
-package game.quiz;
+package game.question;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,6 @@ import java.net.Socket;
 public class Client {
     private final InputStream response;
     private final OutputStream request;
-
     private final String host;
     private final int port;
     /**
@@ -19,7 +18,7 @@ public class Client {
      * @param port the port number to use for the connection
      * @throws IOException if an I/O error occurs while creating the socket
      */
-    Client(String site, int port) throws IOException {
+    public Client(String site, int port) throws IOException {
         Socket socket = new Socket(site, port);
         this.host = site;
         this.port = port;

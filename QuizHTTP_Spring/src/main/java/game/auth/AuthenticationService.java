@@ -2,13 +2,17 @@ package game.auth;
 
 import game.user.AppUser;
 import game.user.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository userRepository;
+
+    @Autowired
+    public AuthenticationService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     void register(String userName, String password) {
         AppUser newUser = new AppUser(userName, password);

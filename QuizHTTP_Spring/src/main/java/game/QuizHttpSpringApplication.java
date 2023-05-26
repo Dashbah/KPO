@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class QuizHttpSpringApplication {
 
     public static void main(String[] args) {
-        Game game = new Game();
-        game.start();
-        // SpringApplication.run(QuizHttpSpringApplication.class, args);
+//        Game game = new Game();
+//        game.start();
+        SpringApplication.run(QuizHttpSpringApplication.class, args);
     }
 
 }
